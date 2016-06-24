@@ -52,15 +52,17 @@ class UnionPay(object):
         signature = OpenSSL.crypto.sign(self.pfx._pkey, sign_raw_str, alg)
         return base64.b64encode(signature)
 
-    def verify(self, data, alg='sha512'):
+    def verify(self, data, alg='sha512', is_bg=False):
         """验签
         :param data: 银联返回的已签名的dictionary
         :param alg: 签名算法
+        :param is_bg: 是否是后台交易
         """
 
-        # 对参数处理
-        for k, v in data.items():
-            data[k] = urllib.unquote_plus(v)
+        # 如果是后台交易，需要对参数处理
+        if is_bg:
+            for k, v in data.items():
+                data[k] = urllib.unquote_plus(v)
 
         signature = base64.b64decode(data.pop('Signature'))
         sign_raw_str = self._get_sign_str(data)
