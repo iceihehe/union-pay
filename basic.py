@@ -5,7 +5,7 @@ import base64
 import urllib
 
 
-class UnionPay(object):
+class ChinaPay(object):
 
     def __init__(self, MerId, pfx_path, pfx_pwd, cer_path):
         """
