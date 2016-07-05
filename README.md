@@ -33,9 +33,9 @@ True
 ##### 给请求参数签名，实例化四个参数依次是商户ID，交易证书路径（pfx文件），交易证书密码，验签证书路径
 ```python
 >>>from basic import UnionPay
->>>cp = UnionPay('merchant_id', 'path/to/transaction/certificate', 'transaction_certificate_password', 'path/to/verify/certificate')
+>>>up = UnionPay('merchant_id', 'path/to/transaction/certificate', 'transaction_certificate_password', 'path/to/verify/certificate')
 >>>data = {"Version": 20140728, "OrderAmt": 1, "TranDate": 11111111, "BusiType": "0001", "MerBgUrl": "http://zfb.cdecube.com/", "MerPageUrl": "http://zfb.cdecube.com/", "MerOrderNo": 111, "TranTime": 111111, "MerId": "000001605260645"}
->>>data_signed = cp.sign(data)
+>>>data_signed = up.sign(data)
 >>>data_signed
 {'TranDate': 11111111, 'BusiType': '0001', 'certId': '40220995861346480087409489142384722381', 'TranTime': 111111, 'Version': 20140728, 'OrderAmt': 1, 'signature': 'BWZv3S4kTbuAisX1/aibDg7AfTjWDG2XLIGrSyQ96iAnYRW+yVfnyUL1/0JCcBxl/XFpYKxhBwFTR6sAYEVP9HQsOPV5f62XC9/+vvsnO3RDj/41Y9mBnAOCKsa07aJhommkWhYKKeD9bxFL91/jcHo6kag+1ips5jA8dqVjc9Q=', 'MerBgUrl': 'http://zfb.cdecube.com/', 'MerPageUrl': 'http://zfb.cdecube.com/', 'MerOrderNo': 111, 'MerId': '000001605260645'}
 ```
@@ -43,7 +43,7 @@ True
 ##### 对银联异步通知请求验证签名
 ```python
 >>>data = {"accessType":"0","bizType":"000201","certId":"68759585097","currencyCode":"156","encoding":"UTF-8","merId":"802310053110831","orderId":"4036074942","queryId":"201607041629538091698","respCode":"00","respMsg":"success","settleAmt":"1","settleCurrencyCode":"156","settleDate":"0704","signMethod":"01","signature":"P9ZwFBs5dCC3cHk4XULFfrk0I4DaDtdTufDRqwoh0VeM9F2I4IqrZs7yMKz8DO3KdJ8GONTHhEHUjrqq+rvVR2p+Hnusb1az/Lxc1X198d4uWekB4ieEhoSWXF0zY3EP8HARtPdcvBb/hR5aWUfOZeI/x1RBPCqReBBuVgMNUa2s5dWbESJYneu57djEaNmPrwiuTecdVrLNUNxnH8rRjvLJI0cJvTgcio9/1HjSCH+45bKKZ003PRhZY+VgDtR8xqY8/xtUfrvqotqF6TDuMPS4WN7sBNDBSHsFDaztv5htwJ9Z6H2Lnz5lgtEStlyu/VPCWYQ8XkcvO1ZcQJKbBA==","traceNo":"809169","traceTime":"0704162953","txnAmt":"1","txnSubType":"01","txnTime":"20160704162953","txnType":"01","version":"5.0.0"}
->>>verify = cp.verify(data)
+>>>verify = up.verify(data)
 >>>verify
 True
 ```
